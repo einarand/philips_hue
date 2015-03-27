@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5761AC61A05004A3BEA /* AppDelegate.swift */; };
+		E030D5791AC61A05004A3BEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E030D5781AC61A05004A3BEA /* Images.xcassets */; };
+		E030D57C1AC61A05004A3BEA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E030D57A1AC61A05004A3BEA /* MainMenu.xib */; };
+		E030D5881AC61A05004A3BEA /* HuebarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5871AC61A05004A3BEA /* HuebarTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E030D5821AC61A05004A3BEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E030D5691AC61A05004A3BEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E030D5701AC61A05004A3BEA;
+			remoteInfo = Huebar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E030D5711AC61A05004A3BEA /* Huebar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Huebar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E030D5751AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E030D5761AC61A05004A3BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E030D5781AC61A05004A3BEA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E030D57B1AC61A05004A3BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		E030D5811AC61A05004A3BEA /* HuebarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuebarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E030D5861AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E030D5871AC61A05004A3BEA /* HuebarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuebarTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E030D56E1AC61A05004A3BEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E030D57E1AC61A05004A3BEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E030D5681AC61A05004A3BEA = {
+			isa = PBXGroup;
+			children = (
+				E030D5731AC61A05004A3BEA /* Huebar */,
+				E030D5841AC61A05004A3BEA /* HuebarTests */,
+				E030D5721AC61A05004A3BEA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E030D5721AC61A05004A3BEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E030D5711AC61A05004A3BEA /* Huebar.app */,
+				E030D5811AC61A05004A3BEA /* HuebarTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E030D5731AC61A05004A3BEA /* Huebar */ = {
+			isa = PBXGroup;
+			children = (
+				E030D5761AC61A05004A3BEA /* AppDelegate.swift */,
+				E030D5781AC61A05004A3BEA /* Images.xcassets */,
+				E030D57A1AC61A05004A3BEA /* MainMenu.xib */,
+				E030D5741AC61A05004A3BEA /* Supporting Files */,
+			);
+			path = Huebar;
+			sourceTree = "<group>";
+		};
+		E030D5741AC61A05004A3BEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E030D5751AC61A05004A3BEA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E030D5841AC61A05004A3BEA /* HuebarTests */ = {
+			isa = PBXGroup;
+			children = (
+				E030D5871AC61A05004A3BEA /* HuebarTests.swift */,
+				E030D5851AC61A05004A3BEA /* Supporting Files */,
+			);
+			path = HuebarTests;
+			sourceTree = "<group>";
+		};
+		E030D5851AC61A05004A3BEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E030D5861AC61A05004A3BEA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E030D5701AC61A05004A3BEA /* Huebar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E030D58B1AC61A05004A3BEA /* Build configuration list for PBXNativeTarget "Huebar" */;
+			buildPhases = (
+				E030D56D1AC61A05004A3BEA /* Sources */,
+				E030D56E1AC61A05004A3BEA /* Frameworks */,
+				E030D56F1AC61A05004A3BEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Huebar;
+			productName = Huebar;
+			productReference = E030D5711AC61A05004A3BEA /* Huebar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E030D5801AC61A05004A3BEA /* HuebarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E030D58E1AC61A05004A3BEA /* Build configuration list for PBXNativeTarget "HuebarTests" */;
+			buildPhases = (
+				E030D57D1AC61A05004A3BEA /* Sources */,
+				E030D57E1AC61A05004A3BEA /* Frameworks */,
+				E030D57F1AC61A05004A3BEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E030D5831AC61A05004A3BEA /* PBXTargetDependency */,
+			);
+			name = HuebarTests;
+			productName = HuebarTests;
+			productReference = E030D5811AC61A05004A3BEA /* HuebarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E030D5691AC61A05004A3BEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Einar Hagen";
+				TargetAttributes = {
+					E030D5701AC61A05004A3BEA = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					E030D5801AC61A05004A3BEA = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = E030D5701AC61A05004A3BEA;
+					};
+				};
+			};
+			buildConfigurationList = E030D56C1AC61A05004A3BEA /* Build configuration list for PBXProject "Huebar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E030D5681AC61A05004A3BEA;
+			productRefGroup = E030D5721AC61A05004A3BEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E030D5701AC61A05004A3BEA /* Huebar */,
+				E030D5801AC61A05004A3BEA /* HuebarTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E030D56F1AC61A05004A3BEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E030D5791AC61A05004A3BEA /* Images.xcassets in Resources */,
+				E030D57C1AC61A05004A3BEA /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E030D57F1AC61A05004A3BEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E030D56D1AC61A05004A3BEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E030D57D1AC61A05004A3BEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E030D5881AC61A05004A3BEA /* HuebarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E030D5831AC61A05004A3BEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E030D5701AC61A05004A3BEA /* Huebar */;
+			targetProxy = E030D5821AC61A05004A3BEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E030D57A1AC61A05004A3BEA /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E030D57B1AC61A05004A3BEA /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E030D5891AC61A05004A3BEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E030D58A1AC61A05004A3BEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E030D58C1AC61A05004A3BEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Huebar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E030D58D1AC61A05004A3BEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Huebar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E030D58F1AC61A05004A3BEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HuebarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Huebar.app/Contents/MacOS/Huebar";
+			};
+			name = Debug;
+		};
+		E030D5901AC61A05004A3BEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HuebarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Huebar.app/Contents/MacOS/Huebar";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E030D56C1AC61A05004A3BEA /* Build configuration list for PBXProject "Huebar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E030D5891AC61A05004A3BEA /* Debug */,
+				E030D58A1AC61A05004A3BEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E030D58B1AC61A05004A3BEA /* Build configuration list for PBXNativeTarget "Huebar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E030D58C1AC61A05004A3BEA /* Debug */,
+				E030D58D1AC61A05004A3BEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E030D58E1AC61A05004A3BEA /* Build configuration list for PBXNativeTarget "HuebarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E030D58F1AC61A05004A3BEA /* Debug */,
+				E030D5901AC61A05004A3BEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E030D5691AC61A05004A3BEA /* Project object */;
+}

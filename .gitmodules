@@ -1,0 +1,3 @@
+[submodule "PhilipsHueSDK-iOS-OSX"]
+	path = PhilipsHueSDK-iOS-OSX
+	url = git@github.com:PhilipsHue/PhilipsHueSDK-iOS-OSX.git
