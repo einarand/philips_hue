@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
 
     @IBAction func lightsOn(sender: NSMenuItem) {
+        var url : NSURL = NSURL(
     }
     
     @IBAction func lightsOff(sender: NSMenuItem) {
