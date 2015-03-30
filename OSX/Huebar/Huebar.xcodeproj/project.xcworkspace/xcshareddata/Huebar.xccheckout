@@ -10,6 +10,10 @@
 	<string>Huebar</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>B515582DBB75994C96F107494A22E751AB76B3FF</key>
+		<string>github.com:mcormier/CocoaMondoKit.git</string>
+		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
+		<string>github.com:SwiftyJSON/SwiftyJSON.git</string>
 		<key>C96C5280451EB08518FB3853E163B949B8F79702</key>
 		<string>github.com:einarand/philips_hue.git</string>
 	</dict>
@@ -17,6 +21,10 @@
 	<string>OSX/Huebar/Huebar.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>B515582DBB75994C96F107494A22E751AB76B3FF</key>
+		<string>../../../../OSX/CocoaMondoKit/</string>
+		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
+		<string>../../../../SwiftyJSON/</string>
 		<key>C96C5280451EB08518FB3853E163B949B8F79702</key>
 		<string>../../../..</string>
 	</dict>
@@ -32,9 +40,25 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B515582DBB75994C96F107494A22E751AB76B3FF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CocoaMondoKit</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>C96C5280451EB08518FB3853E163B949B8F79702</string>
 			<key>IDESourceControlWCCName</key>
 			<string>philips_hue</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SwiftyJSON</string>
 		</dict>
 	</array>
 </dict>

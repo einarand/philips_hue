@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		E01C3A9C1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01C3A9B1AC7EE9600AE4371 /* SwiftyJSON.swift */; };
 		E01C3A9D1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01C3A9B1AC7EE9600AE4371 /* SwiftyJSON.swift */; };
+		E01C3AC81AC9616E00AE4371 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01C3AC71AC9616E00AE4371 /* AppKit.framework */; };
 		E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5761AC61A05004A3BEA /* AppDelegate.swift */; };
 		E030D5791AC61A05004A3BEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E030D5781AC61A05004A3BEA /* Images.xcassets */; };
 		E030D57C1AC61A05004A3BEA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E030D57A1AC61A05004A3BEA /* MainMenu.xib */; };
 		E030D5881AC61A05004A3BEA /* HuebarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5871AC61A05004A3BEA /* HuebarTests.swift */; };
+		E0F00EE21AC98A7500ECBD84 /* SwitchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 /* Begin PBXFileReference section */
 		E01C3A9B1AC7EE9600AE4371 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../../SwiftyJSON/Source/SwiftyJSON.swift; sourceTree = "<group>"; };
 		E01C3A9E1AC7EF1400AE4371 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = ../../SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
+		E01C3AC71AC9616E00AE4371 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		E030D5711AC61A05004A3BEA /* Huebar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Huebar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E030D5751AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E030D5761AC61A05004A3BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 		E030D5811AC61A05004A3BEA /* HuebarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuebarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E030D5861AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E030D5871AC61A05004A3BEA /* HuebarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuebarTests.swift; sourceTree = "<group>"; };
+		E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01C3AC81AC9616E00AE4371 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,10 +103,12 @@
 		E030D5681AC61A05004A3BEA = {
 			isa = PBXGroup;
 			children = (
-				E01C3A9E1AC7EF1400AE4371 /* SwiftyJSON.xcodeproj */,
+				E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */,
+				E01C3AC71AC9616E00AE4371 /* AppKit.framework */,
 				E030D5731AC61A05004A3BEA /* Huebar */,
 				E030D5841AC61A05004A3BEA /* HuebarTests */,
 				E030D5721AC61A05004A3BEA /* Products */,
+				E01C3A9E1AC7EF1400AE4371 /* SwiftyJSON.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -288,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */,
+				E0F00EE21AC98A7500ECBD84 /* SwitchControl.swift in Sources */,
 				E01C3A9C1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
