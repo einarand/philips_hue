@@ -22,9 +22,9 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B515582DBB75994C96F107494A22E751AB76B3FF</key>
-		<string>../../../../OSX/CocoaMondoKit/</string>
+		<string>../../../../OSX/CocoaMondoKit</string>
 		<key>C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3</key>
-		<string>../../../../SwiftyJSON/</string>
+		<string>../../../../SwiftyJSON</string>
 		<key>C96C5280451EB08518FB3853E163B949B8F79702</key>
 		<string>../../../..</string>
 	</dict>

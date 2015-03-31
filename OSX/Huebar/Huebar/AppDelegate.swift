@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = lightControlMenu
         
         getGroups()
+        
     }
 
     @IBAction func lightsOn(sender: NSMenuItem) {
@@ -39,6 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func addLightGroupItem(name: String, id: String, on: Bool, value: NSInteger) {
         var menuItem = NSMenuItem()
+        menuItem.representedObject = id;
         
         var view = NSView(frame: NSRect(x: 0,y: 0,width: 200,height: 40))
         var txt = NSTextField(frame: NSRect(x: 40, y:10, width: 200, height: 30))
@@ -48,7 +50,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         txt.editable = false;
         txt.selectable = false;
         view.addSubview(txt)
-        
         
         var switchControl = SwitchControl(frame: NSRect(x: 5, y:5, width: 30, height: 15))
         switchControl.isOn = on

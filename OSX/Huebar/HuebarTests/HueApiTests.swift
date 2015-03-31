@@ -9,11 +9,20 @@
 import Cocoa
 import XCTest
 
-class HuebarTests: XCTestCase {
+class HueApiTests: XCTestCase {
+    
+    var api: HueApi?
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        api = HueApi(ipAddress: "192.168.1.108", username: "newdeveloper",deviceName: "",applicationName: "")
+    }
+    
+    func testSetGroupState() {
+        api!.groupState("3", on: true, failure: {
+            (error: NSError) -> Void in
+            NSLog("Failure: " +  error.description)
+        })
     }
     
     override func tearDown() {
