@@ -25,6 +25,16 @@ class HueApiTests: XCTestCase {
         })
     }
     
+    func testGetGroup() {
+        api!.getGroupState("3", success: {
+            (group: HueApi.Group) -> Void in
+            NSLog(group.description)
+        }, failure: {
+            (error: NSError) -> Void in
+            
+        })
+    }
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()

@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var sliderItem: NSView!
     
     let ipAdress: String = "192.168.1.108"
+    let hueApi: HueApi = HueApi(ipAddress: "192.168.1.108", username: "newdeveloper")
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -24,7 +25,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.image = icon
         statusItem.menu = lightControlMenu
         
-        getGroups()
+        hueApi.getGroups({
+            groupDict in
+            NSLog("")
+            for (id, group) in groupDict {
+                self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
+            }
+        })
         
     }
 
@@ -62,7 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         slider.action = Selector("onSlide:")
         slider.maxValue = 255;
         slider.minValue = 0;
-        slider.continuous = false;
+        slider.continuous = true;
         slider.integerValue = value
         view.addSubview(slider)
         menuItem.view = view
@@ -73,11 +80,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func switchChanged(sender: SwitchControl) {
         NSLog("Switch: @", sender.isOn)
-        groupState("3", on: sender.isOn, bri: nil)
+        hueApi.groupState("3", on: sender.isOn)
     }
     
     func onSlide(sender: NSSlider) {
-        groupState("3", on: true, bri: sender.integerValue)
+        hueApi.groupState("3", on: true, brightness: sender.integerValue)
         NSLog(String(sender.integerValue))
     }
     
@@ -110,7 +117,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
-    func groupState(groupId: NSString, on: Bool?, bri: NSInteger?) {
+    func dgroupState(groupId: NSString, on: Bool?, bri: NSInteger?) {
         let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/groups/" + groupId + "/action")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "PUT"
