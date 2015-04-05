@@ -8,6 +8,52 @@
 
 import Foundation
 
+public struct Group: Printable {
+    let id: String
+    let name: String
+    let on: Bool
+    let brightness: Int
+    public var description: String {
+        return ("id:\(id), name:\(name), on:\(on), brightness:\(brightness)")
+    }
+}
+
+public struct Scene: Printable {
+    let id: String
+    let name: String
+    let lights: [String]
+    let active: Bool
+    public var description: String {
+        return ("id:\(id), name:\(name), lights:\(lights), active:\(active)")
+    }
+}
+
+public struct XY: RawRepresentable {
+    let x: Float
+    let y: Float
+    
+    public init?(rawValue: String) {
+        x=1
+        y=0.5
+    }
+    
+    public var rawValue: String { get {
+        return ("[\(x),\(y)]")
+    }}
+   
+}
+
+enum Alert: String {
+    case none = "none"
+    case select = "select"
+    case lselect = "lselect"
+}
+
+enum Effect: String {
+    case colorloop = "colorloop"
+    case none = "none"
+}
+
 public class HueApi {
     
     let baseUrl: NSURL
@@ -25,14 +71,33 @@ public class HueApi {
         baseUrl = NSURL(string: "http://\(ipAddress)/api/\(username)/")!
     }
     
-    func groupState(groupId: String, on: Bool?=nil, brightness: Int?=nil, success: (() -> ())?=nil, failure: (NSError -> ())?=nil) {
+    func setLightState(id: String, on: Bool) {
+        let url = NSURL(string: "lights/\(id)/state", relativeToURL: baseUrl)!
+        put(url, json: JSON(["on": on]))
+    }
+    
+    func groupState(groupId: String,
+        on: Bool?=nil,
+        brightness: UInt8?=nil,
+        hue: UInt16?=nil,
+        sat: UInt8?=nil,
+        xy: XY?=nil,
+        ct: UInt16?=nil,
+        alert: Alert?=nil,
+        effect: Effect?=nil,
+        transitionTime: UInt16?=nil,
+        scene: String?=nil,
+        success: (() -> ())?=nil, failure: (NSError -> ())?=nil) {
+            
         var json = JSON([:])
-        if let on = on? {
-            json["on"].boolValue = on
-        }
-        if let brightness = brightness? {
-            json["bri"].intValue = brightness
-        }
+        if let on = on? { json["on"].boolValue = on }
+        if let brightness = brightness? { json["bri"].uInt8 = brightness }
+        if let hue = hue? { json["hue"].uInt16 = hue }
+        if let xy = xy? { json["xy"].string = xy.rawValue }
+        if let alert = alert? { json["alert"].string = alert.rawValue }
+        if let effect = effect? { json["effect"].string = effect.rawValue }
+        if let transitionTime = transitionTime? { json["transitiontime"].uInt16 = transitionTime }
+        if let scene = scene? { json["scene"].string = scene }
         
         put(NSURL(string: "groups/\(groupId)/action", relativeToURL: baseUrl)!, json: json, success: {
             (json: JSON) -> Void in
@@ -56,22 +121,27 @@ public class HueApi {
             }, failure: failure)
     }
     
+    func getScenes(success: (([String:Scene]) -> ()), failure: (NSError -> ())?=nil)  {
+        get(NSURL(string: "scenes", relativeToURL: baseUrl)!, success: {
+            (json: JSON) -> Void in
+            var sceneDict: [String:Scene] = [:]
+            
+            for (id: String, sceneJson: JSON) in json {
+                sceneDict[id] = Scene(id: id,
+                    name: sceneJson["name"].stringValue,
+                    lights: sceneJson["lights"].arrayObject as [String],
+                    active: sceneJson["active"].boolValue)
+            }
+            success(sceneDict)
+            }, failure: failure)
+    }
+    
     func getGroupState(groupId: String, success: ((Group) -> ()), failure: (NSError -> ())?=nil) {
         get(NSURL(string: "groups/\(groupId)", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             success(Group(id: groupId, name: json["name"].stringValue, on: json["action"]["on"].boolValue, brightness: json["action"]["bri"].intValue))
         }, failure: failure)
         
-    }
-    
-    public struct Group {
-        var id: String
-        var name: String
-        var on: Bool
-        var brightness: Int
-        var description: String {
-            return ("id:\(id), name:\(name), on:\(on), brightness:\(brightness)")
-        }
     }
     
     func get(url: NSURL, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
@@ -95,8 +165,7 @@ public class HueApi {
             request.HTTPBody = json!.rawData()!
             body = jsonToString(json!)
         }
-        NSLog("\(httpMethod)(\(sequenceNumber)) \(url.absoluteURL!) body:\(body)")
-        
+        NSLog("Request (\(sequenceNumber)): \(httpMethod) \(url.absoluteURL!) body:\(body)")
         
         var task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) -> Void in
@@ -104,7 +173,6 @@ public class HueApi {
             if response != nil {
                 let httpResponse = response as NSHTTPURLResponse
                 var sequenceNumberStr = request.valueForHTTPHeaderField("sequenceNumber")!
-
                 NSLog("Response(\(sequenceNumberStr)): statusCode:\(httpResponse.statusCode) body:\(self.dataToString(data))")
             }
             
@@ -115,7 +183,8 @@ public class HueApi {
                 let errorJson = json[0]["error"]
                 if (errorJson != nil) {
                     let errorDescription = errorJson["description"].stringValue
-                    failure?(NSError(domain: errorDescription, code: 0, userInfo: nil))
+                    let errorCode = errorJson["type"].intValue
+                    failure?(NSError(domain: errorDescription, code: errorCode, userInfo: nil))
                 } else {
                     success?(json)
                 }

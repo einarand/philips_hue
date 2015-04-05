@@ -27,7 +27,7 @@ class HueApiTests: XCTestCase {
     
     func testGetGroup() {
         api!.getGroupState("3", success: {
-            (group: HueApi.Group) -> Void in
+            (group: Group) -> Void in
             NSLog(group.description)
         }, failure: {
             (error: NSError) -> Void in

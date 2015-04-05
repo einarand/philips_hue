@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var sliderItem: NSView!
     
     let ipAdress: String = "192.168.1.108"
+    //let hueApi: HueApi = HueApi(ipAddress: "127.0.0.1:8000", username: "newdeveloper")
     let hueApi: HueApi = HueApi(ipAddress: "192.168.1.108", username: "newdeveloper")
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
@@ -27,9 +28,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         hueApi.getGroups({
             groupDict in
-            NSLog("")
             for (id, group) in groupDict {
                 self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
+                println(group)
+            }
+        })
+        
+        hueApi.getScenes({
+            sceneDict in
+            for (id, scene) in sceneDict {
+                println(scene)
             }
         })
         
@@ -40,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let reachableLights : [String] = getReachableLights();
         for (light: String) in reachableLights {
-            lightState(light, on: true)
+            hueApi.setLightState(light, on: true)
         }
         
     }
@@ -84,7 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func onSlide(sender: NSSlider) {
-        hueApi.groupState("3", on: true, brightness: sender.integerValue)
+        hueApi.groupState("3", on: true, brightness: UInt8(sender.integerValue))
         NSLog(String(sender.integerValue))
     }
     
@@ -93,47 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let reachableLights : [String] = getReachableLights();
         for (light: String) in reachableLights {
-            lightState(light, on: false)
-        }
-    }
-    
-    func getGroups() {
-        let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/groups")!
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
-        
-        if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
-            let json = JSON(data: data)
-            
-            for (id: String, groupJson: JSON) in json {
-                let name = groupJson["name"].stringValue
-                let value = groupJson["action"]["bri"].intValue
-                let on = groupJson["action"]["on"].boolValue
-                addLightGroupItem(name, id: id, on: on, value: value)
-            }
-        } else {
-            NSLog("Failed")
-        }
-        
-    }
-    
-    func dgroupState(groupId: NSString, on: Bool?, bri: NSInteger?) {
-        let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/groups/" + groupId + "/action")!
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "PUT"
-        var json: JSON = [:]
-        if let onState = on? {
-            json["on"].boolValue = onState
-        }
-        if let briValue = bri? {
-            json["bri"].intValue = briValue
-        }
-        let rawJson = json.rawData()!
-        
-        NSLog(NSString(data: rawJson, encoding: NSUTF8StringEncoding)!)
-        request.HTTPBody = rawJson
-        if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
-            NSLog("Response: " + NSString(data: data, encoding: NSUTF8StringEncoding)!)
+            hueApi.setLightState(light, on: false)
         }
     }
     
@@ -157,15 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return lights
     }
     
-    func lightState(id: NSString, on: Bool) {
-        let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/lights/" + id + "/state")!
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "PUT"
-        request.HTTPBody = JSON(["on": on]).rawData()!
-        if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
-            NSLog("Response: " + NSString(data: data, encoding: NSUTF8StringEncoding)!)
-        }
-    }
+
     
     func lightState(id: NSString) -> NSInteger {
         let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/lights/" + id + "/state")!

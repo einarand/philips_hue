@@ -6,22 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Huebar/AppDelegate.swift"
-            timestampString = "449749138.427919"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "dgroupState(_:on:bri:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -58,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "449747464.376229"
+            timestampString = "449885560.99611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "groupState(_:on:brightness:success:failure:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "groupState(_:on:brightness:hue:sat:xy:ct:alert:effect:transitionTime:scene:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "449751094.785489"
+            timestampString = "449885560.99611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "jsonToString(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "449751094.785489"
+            timestampString = "449885560.99611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "RESTCall(_:url:json:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "449751094.785489"
+            timestampString = "449885560.99611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "RESTCall(_:url:json:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "449751094.785489"
+            timestampString = "449885560.99611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "RESTCall(_:url:json:success:failure:)"
             landmarkType = "5">
             <Locations>
@@ -159,6 +143,128 @@
                   offsetFromSymbolStart = "2239">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Huebar/HueApi.swift"
+            timestampString = "449885560.99611"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "getScenes(_:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Huebar.HueApi.getScenes (Huebar.HueApi)((Swift.Dictionary&lt;Swift.String, Huebar.Scene&gt;) -&gt; (), failure : Swift.Optional&lt;(ObjectiveC.NSError) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Huebar"
+                  urlString = "file:///Users/einahage/projects/private/philips_hue/OSX/Huebar/Huebar/HueApi.swift"
+                  timestampString = "449879334.736572"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "45">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Huebar.HueApi.(getScenes (Huebar.HueApi) -&gt; ((Swift.Dictionary&lt;Swift.String, Huebar.Scene&gt;) -&gt; (), failure : Swift.Optional&lt;(ObjectiveC.NSError) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Huebar"
+                  urlString = "file:///Users/einahage/projects/private/philips_hue/OSX/Huebar/Huebar/HueApi.swift"
+                  timestampString = "449879334.736731"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Huebar/HueApi.swift"
+            timestampString = "449885560.99611"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "getScenes(_:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Huebar.HueApi.get (Huebar.HueApi)(ObjectiveC.NSURL, success : Swift.Optional&lt;(Huebar.JSON) -&gt; ()&gt;, failure : Swift.Optional&lt;(ObjectiveC.NSError) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Huebar"
+                  urlString = "file:///Users/einahage/projects/private/philips_hue/OSX/Huebar/Huebar/HueApi.swift"
+                  timestampString = "449878790.459"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "69">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Huebar.HueApi.(get (Huebar.HueApi) -&gt; (ObjectiveC.NSURL, success : Swift.Optional&lt;(Huebar.JSON) -&gt; ()&gt;, failure : Swift.Optional&lt;(ObjectiveC.NSError) -&gt; ()&gt;) -&gt; ()).(default argument 1)"
+                  moduleName = "Huebar"
+                  urlString = "file:///Users/einahage/projects/private/philips_hue/OSX/Huebar/Huebar/HueApi.swift"
+                  timestampString = "449878790.459178"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Huebar.HueApi.(get (Huebar.HueApi) -&gt; (ObjectiveC.NSURL, success : Swift.Optional&lt;(Huebar.JSON) -&gt; ()&gt;, failure : Swift.Optional&lt;(ObjectiveC.NSError) -&gt; ()&gt;) -&gt; ()).(default argument 2)"
+                  moduleName = "Huebar"
+                  urlString = "file:///Users/einahage/projects/private/philips_hue/OSX/Huebar/Huebar/HueApi.swift"
+                  timestampString = "449878790.459291"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Huebar/HueApi.swift"
+            timestampString = "449886968.957121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "XY"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
