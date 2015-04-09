@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 public struct Group: Printable {
     let id: String
@@ -71,6 +72,10 @@ public class HueApi {
         baseUrl = NSURL(string: "http://\(ipAddress)/api/\(username)/")!
     }
     
+    func getBridgeIpAddress(success: () -> (), failure: NSError -> ()) {
+        //get(NSURL("https://www.meethue.com/api/nupnp"), success, failure)
+    }
+    
     func setLightState(id: String, on: Bool) {
         let url = NSURL(string: "lights/\(id)/state", relativeToURL: baseUrl)!
         put(url, json: JSON(["on": on]))
@@ -90,14 +95,15 @@ public class HueApi {
         success: (() -> ())?=nil, failure: (NSError -> ())?=nil) {
             
         var json = JSON([:])
-        if let on = on? { json["on"].boolValue = on }
-        if let brightness = brightness? { json["bri"].uInt8 = brightness }
-        if let hue = hue? { json["hue"].uInt16 = hue }
-        if let xy = xy? { json["xy"].string = xy.rawValue }
-        if let alert = alert? { json["alert"].string = alert.rawValue }
-        if let effect = effect? { json["effect"].string = effect.rawValue }
-        if let transitionTime = transitionTime? { json["transitiontime"].uInt16 = transitionTime }
-        if let scene = scene? { json["scene"].string = scene }
+        if let on = on { json["on"].boolValue = on }
+        if let brightness = brightness { json["bri"].uInt8 = brightness }
+        if let hue = hue { json["hue"].uInt16 = hue }
+        if let xy = xy { json["xy"].string = xy.rawValue }
+        if let alert = alert { json["alert"].string = alert.rawValue }
+        if let effect = effect { json["effect"].string = effect.rawValue }
+        if let transitionTime = transitionTime { json["transitiontime"].uInt16 = transitionTime }
+        if let scene = scene { json["scene"].string = scene }
+
         
         put(NSURL(string: "groups/\(groupId)/action", relativeToURL: baseUrl)!, json: json, success: {
             (json: JSON) -> Void in
@@ -106,7 +112,7 @@ public class HueApi {
             }, failure: failure)
     }
     
-    func getGroups(success: (([String:Group]) -> ()), failure: (NSError -> ())?=nil) {
+    func getGroups(success: [String:Group] -> (), failure: (NSError -> ())?=nil) {
         get(NSURL(string: "groups", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             var groupDict: [String:Group] = [:]
@@ -121,7 +127,7 @@ public class HueApi {
             }, failure: failure)
     }
     
-    func getScenes(success: (([String:Scene]) -> ()), failure: (NSError -> ())?=nil)  {
+    func getScenes(success: [String:Scene] -> (), failure: (NSError -> ())?=nil)  {
         get(NSURL(string: "scenes", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             var sceneDict: [String:Scene] = [:]
@@ -129,14 +135,14 @@ public class HueApi {
             for (id: String, sceneJson: JSON) in json {
                 sceneDict[id] = Scene(id: id,
                     name: sceneJson["name"].stringValue,
-                    lights: sceneJson["lights"].arrayObject as [String],
+                    lights: sceneJson["lights"].arrayObject as! [String],
                     active: sceneJson["active"].boolValue)
             }
             success(sceneDict)
             }, failure: failure)
     }
     
-    func getGroupState(groupId: String, success: ((Group) -> ()), failure: (NSError -> ())?=nil) {
+    func getGroupState(groupId: String, success: Group -> (), failure: (NSError -> ())?=nil) {
         get(NSURL(string: "groups/\(groupId)", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             success(Group(id: groupId, name: json["name"].stringValue, on: json["action"]["on"].boolValue, brightness: json["action"]["bri"].intValue))
@@ -171,7 +177,7 @@ public class HueApi {
             (data, response, error) -> Void in
             
             if response != nil {
-                let httpResponse = response as NSHTTPURLResponse
+                let httpResponse = response as! NSHTTPURLResponse
                 var sequenceNumberStr = request.valueForHTTPHeaderField("sequenceNumber")!
                 NSLog("Response(\(sequenceNumberStr)): statusCode:\(httpResponse.statusCode) body:\(self.dataToString(data))")
             }
@@ -193,12 +199,17 @@ public class HueApi {
         task.resume()
     }
     
-    func jsonToString(json: JSON) -> NSString {
-        return NSString(data: json.rawData()!, encoding: NSUTF8StringEncoding)!
+    func jsonToString(json: JSON) -> String {
+        return NSString(data: json.rawData()!, encoding: NSUTF8StringEncoding) as! String
     }
     
     func dataToString(data: NSData) -> NSString {
         return NSString(data: data, encoding: NSUTF8StringEncoding)!
+    }
+    
+    func setupSocket() {
+        
+        
     }
     
     

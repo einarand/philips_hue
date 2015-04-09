@@ -10,36 +10,82 @@ import Cocoa
 import AppKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
 
     @IBOutlet weak var lightControlMenu: NSMenu!
     @IBOutlet weak var sliderItem: NSView!
     
-    let ipAdress: String = "192.168.1.108"
-    //let hueApi: HueApi = HueApi(ipAddress: "127.0.0.1:8000", username: "newdeveloper")
-    let hueApi: HueApi = HueApi(ipAddress: "192.168.1.108", username: "newdeveloper")
+    var ipAddress: String?
+    var hueBridgeFound = false
+    var hueApi: HueApi?
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let icon = NSImage(named: "bulbIcon")
-        icon?.setTemplate(true)
-        statusItem.image = icon
-        statusItem.menu = lightControlMenu
+    //ssdp stuff
+    var ssdpAddres          = "239.255.255.250"
+    var ssdpPort:UInt16     = 1900
+    var ssdpSocket:GCDAsyncUdpSocket!
+    var ssdpSocketRec:GCDAsyncUdpSocket!
+    var error : NSError?
+    //replace ST:roku:ecp with ST:ssdp:all to view all devices
+    let data = "M-SEARCH * HTTP/1.1\r\nHost: 239.255.255.250:1900\r\nMan: \"ssdp:discover\"\r\nMX: 3\r\nST: \"ssdp:all\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)
+    
+    func discovery() {
+        if ipAddress == nil {
+            ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
+            ssdpSocket.sendData(data, withTimeout: -1, tag: 0)
+            ssdpSocket.bindToPort(ssdpPort, error: &error)
+            ssdpSocket.joinMulticastGroup(ssdpAddres, error: &error)
+            ssdpSocket.beginReceiving(&error).boolValue
         
-        hueApi.getGroups({
+            while(!hueBridgeFound) {
+                sleep(1)
+                println("waiting..")
+            }
+            ssdpSocket.close()
+        }
+        
+        hueApi = HueApi(ipAddress: ipAddress!, username: "newdeveloper")
+        
+        hueApi!.getGroups({
             groupDict in
             for (id, group) in groupDict {
                 self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
                 println(group)
             }
         })
+    }
+    
+    func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
         
-        hueApi.getScenes({
-            sceneDict in
-            for (id, scene) in sceneDict {
-                println(scene)
-            }
-        })
+        var host: NSString?
+        var port1: UInt16 = 0
+        GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address)
+        println("From \(host!)")
+        let decodedData: NSString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        
+        println(decodedData)
+        if decodedData.containsString("IpBridge") {
+            NSLog("Found HueBridge on \(host!)")
+            ipAddress = host as? String;
+            hueBridgeFound = true;
+        }
+        
+    }
+
+    
+    func applicationDidFinishLaunching(aNotification: NSNotification) {
+        let icon = NSImage(named: "bulbIcon")
+        icon?.setTemplate(true)
+        statusItem.image = icon
+        statusItem.menu = lightControlMenu
+        
+        ipAddress = "192.168.10.117"
+        
+        let thread = NSThread(target: self, selector: "discovery", object: nil)
+        thread.start()
+        
+        var timer = NSTimer(timeInterval: 10, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
+        timer.fire()
         
     }
 
@@ -48,36 +94,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let reachableLights : [String] = getReachableLights();
         for (light: String) in reachableLights {
-            hueApi.setLightState(light, on: true)
+            hueApi!.setLightState(light, on: true)
         }
         
     }
     
     func addLightGroupItem(name: String, id: String, on: Bool, value: NSInteger) {
         var menuItem = NSMenuItem()
-        menuItem.representedObject = id;
+        menuItem.representedObject = id
         
         var view = NSView(frame: NSRect(x: 0,y: 0,width: 200,height: 40))
+        
         var txt = NSTextField(frame: NSRect(x: 40, y:10, width: 200, height: 30))
         txt.stringValue = name
-        txt.bezeled = false;
-        txt.drawsBackground = false;
-        txt.editable = false;
-        txt.selectable = false;
+        txt.bezeled = false
+        txt.drawsBackground = false
+        txt.editable = false
+        txt.selectable = false
         view.addSubview(txt)
         
         var switchControl = SwitchControl(frame: NSRect(x: 5, y:5, width: 30, height: 15))
         switchControl.isOn = on
+        switchControl.tag = id.toInt()!
         switchControl.target = self
         switchControl.action = Selector("switchChanged:")
         view.addSubview(switchControl)
         
         var slider = NSSlider(frame: NSRect(x: 40, y:3, width: 150, height: 20))
-        slider.target = self;
+        slider.target = self
+        slider.tag = id.toInt()!
         slider.action = Selector("onSlide:")
-        slider.maxValue = 255;
-        slider.minValue = 0;
-        slider.continuous = true;
+        slider.maxValue = 255
+        slider.minValue = 0
+        slider.continuous = false
         slider.integerValue = value
         view.addSubview(slider)
         menuItem.view = view
@@ -88,12 +137,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func switchChanged(sender: SwitchControl) {
         NSLog("Switch: @", sender.isOn)
-        hueApi.groupState("3", on: sender.isOn)
+        hueApi!.groupState("\(sender.tag)", on: sender.isOn)
     }
     
+    var ready = true;
+    let seconds = 0.3
+    
     func onSlide(sender: NSSlider) {
-        hueApi.groupState("3", on: true, brightness: UInt8(sender.integerValue))
+        if (ready) {
+            ready = false;
+            let delay = seconds * Double(NSEC_PER_SEC)
+            var dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                self.ready = true;
+            })
+            hueApi!.groupState("\(sender.tag)", on: true, brightness: UInt8(sender.integerValue))
+        }
         NSLog(String(sender.integerValue))
+    }
+    
+    func update() {
+        
     }
     
     @IBAction func lightsOff(sender: NSMenuItem) {
@@ -101,12 +166,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let reachableLights : [String] = getReachableLights();
         for (light: String) in reachableLights {
-            hueApi.setLightState(light, on: false)
+            hueApi!.setLightState(light, on: false)
         }
     }
     
     func getReachableLights() -> [String] {
-        let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/lights")!
+        let url: NSURL = NSURL(string: "http://" + ipAddress! + "/api/newdeveloper/lights")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         var lights = [String]()
@@ -125,34 +190,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return lights
     }
     
-
-    
-    func lightState(id: NSString) -> NSInteger {
-        let url: NSURL = NSURL(string: "http://" + ipAdress + "/api/newdeveloper/lights/" + id + "/state")!
+    func lightState(id: String) -> NSInteger {
+        let url: NSURL = NSURL(string: "http://" + ipAddress! + "/api/newdeveloper/lights/" + id + "/state")!
         var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
-            NSLog("Response: " + NSString(data: data, encoding: NSUTF8StringEncoding)!)
+            NSLog("Response: " + (NSString(data: data, encoding: NSUTF8StringEncoding) as! String))
         }
         return 0
     }
     
-    
-    func backup() {
-        let json = JSON(["persons":[["name":"Einar", "age": 36], ["name":"Per", "age": 23]]])
-        
-        let str = NSString(data: json.rawData()!, encoding: NSUTF8StringEncoding)
-        NSLog(str!)
-        
-        for (index: String, subJson: JSON) in json["persons"] {
-            if let name = subJson["name"].string {
-                NSLog(name)
-            } else {
-                NSLog("Feil")
-            }
-        }
-    }
-
 }
 
 protocol HueControl {
