@@ -79,23 +79,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         statusItem.image = icon
         statusItem.menu = lightControlMenu
         
-        ipAddress = "192.168.10.117"
+        ipAddress = "192.168.128.2"
         
         let thread = NSThread(target: self, selector: "discovery", object: nil)
         thread.start()
         
         var timer = NSTimer(timeInterval: 10, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
         timer.fire()
-        
-    }
-
-    @IBAction func lightsOn(sender: NSMenuItem) {
-        NSLog("LightsOn pressed")
-        
-        let reachableLights : [String] = getReachableLights();
-        for (light: String) in reachableLights {
-            hueApi!.setLightState(light, on: true)
-        }
         
     }
     
@@ -137,7 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
     
     func switchChanged(sender: SwitchControl) {
         NSLog("Switch: @", sender.isOn)
-        hueApi!.groupState("\(sender.tag)", on: sender.isOn)
+        hueApi!.setGroupState("\(sender.tag)", on: sender.isOn, transitionTime: 0)
     }
     
     var ready = true;
@@ -152,12 +142,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 self.ready = true;
             })
-            hueApi!.groupState("\(sender.tag)", on: true, brightness: UInt8(sender.integerValue))
+            hueApi!.setGroupState("\(sender.tag)", on: true, brightness: UInt8(sender.integerValue))
         }
         NSLog(String(sender.integerValue))
     }
     
     func update() {
+        
+    }
+    
+    @IBAction func lightsOn(sender: NSMenuItem) {
+        NSLog("LightsOn pressed")
+        
+        let reachableLights : [String] = getReachableLights();
+        for (light: String) in reachableLights {
+            hueApi!.setLightState(light, on: true)
+        }
         
     }
     
@@ -188,16 +188,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
             NSLog("Failed")
         }
         return lights
-    }
-    
-    func lightState(id: String) -> NSInteger {
-        let url: NSURL = NSURL(string: "http://" + ipAddress! + "/api/newdeveloper/lights/" + id + "/state")!
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
-        if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
-            NSLog("Response: " + (NSString(data: data, encoding: NSUTF8StringEncoding) as! String))
-        }
-        return 0
     }
     
 }

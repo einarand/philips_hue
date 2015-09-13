@@ -19,7 +19,7 @@ class HueApiTests: XCTestCase {
     }
     
     func testSetGroupState() {
-        api!.groupState("3", on: true, failure: {
+        api!.setGroupState("3", on: true, failure: {
             (error: NSError) -> Void in
             NSLog("Failure: " +  error.description)
         })
