@@ -13,6 +13,7 @@
 		E030D5791AC61A05004A3BEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E030D5781AC61A05004A3BEA /* Images.xcassets */; };
 		E030D57C1AC61A05004A3BEA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E030D57A1AC61A05004A3BEA /* MainMenu.xib */; };
 		E030D5881AC61A05004A3BEA /* HueApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5871AC61A05004A3BEA /* HueApiTests.swift */; };
+		E047CDF01BA611810056ACEB /* HueSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047CDEF1BA611810056ACEB /* HueSlider.swift */; };
 		E07B26D31AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */; };
 		E07B26D41AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */; };
 		E07B26D51AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D21AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m */; };
@@ -42,6 +43,7 @@
 		E030D5811AC61A05004A3BEA /* HuebarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuebarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E030D5861AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E030D5871AC61A05004A3BEA /* HueApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueApiTests.swift; sourceTree = "<group>"; };
+		E047CDEF1BA611810056ACEB /* HueSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueSlider.swift; sourceTree = "<group>"; };
 		E07B26CA1AD3F0F300AF36F8 /* Huebar-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Huebar-Bridging-Header.h"; sourceTree = "<group>"; };
 		E07B26CF1AD3F1D800AF36F8 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
 		E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */,
 				E030D57A1AC61A05004A3BEA /* MainMenu.xib */,
+				E047CDEF1BA611810056ACEB /* HueSlider.swift */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				E07B26D31AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */,
 				E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */,
 				E0F00EE21AC98A7500ECBD84 /* SwitchControl.swift in Sources */,
+				E047CDF01BA611810056ACEB /* HueSlider.swift in Sources */,
 				E07B26D51AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */,
 				E01C3A9C1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */,
 			);

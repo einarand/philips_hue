@@ -16,61 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
     @IBOutlet weak var sliderItem: NSView!
     
     var ipAddress: String?
-    var hueBridgeFound = false
     var hueApi: HueApi?
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-
-    //ssdp stuff
-    var ssdpAddres          = "239.255.255.250"
-    var ssdpPort:UInt16     = 1900
-    var ssdpSocket:GCDAsyncUdpSocket!
-    var ssdpSocketRec:GCDAsyncUdpSocket!
-    var error : NSError?
-    //replace ST:roku:ecp with ST:ssdp:all to view all devices
-    let data = "M-SEARCH * HTTP/1.1\r\nHost: 239.255.255.250:1900\r\nMan: \"ssdp:discover\"\r\nMX: 3\r\nST: \"ssdp:all\"\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)
-    
-    func discovery() {
-        if ipAddress == nil {
-            ssdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
-            ssdpSocket.sendData(data, withTimeout: -1, tag: 0)
-            ssdpSocket.bindToPort(ssdpPort, error: &error)
-            ssdpSocket.joinMulticastGroup(ssdpAddres, error: &error)
-            ssdpSocket.beginReceiving(&error).boolValue
-        
-            while(!hueBridgeFound) {
-                sleep(1)
-                println("waiting..")
-            }
-            ssdpSocket.close()
-        }
-        
-        hueApi = HueApi(ipAddress: ipAddress!, username: "newdeveloper")
-        
-        hueApi!.getGroups({
-            groupDict in
-            for (id, group) in groupDict {
-                self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
-                println(group)
-            }
-        })
-    }
-    
-    func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
-        
-        var host: NSString?
-        var port1: UInt16 = 0
-        GCDAsyncUdpSocket.getHost(&host, port: &port1, fromAddress: address)
-        println("From \(host!)")
-        let decodedData: NSString = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        
-        println(decodedData)
-        if decodedData.containsString("IpBridge") {
-            NSLog("Found HueBridge on \(host!)")
-            ipAddress = host as? String;
-            hueBridgeFound = true;
-        }
-        
-    }
 
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -79,13 +26,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         statusItem.image = icon
         statusItem.menu = lightControlMenu
         
-        ipAddress = "192.168.128.2"
-        
-        let thread = NSThread(target: self, selector: "discovery", object: nil)
-        thread.start()
-        
-        var timer = NSTimer(timeInterval: 10, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
-        timer.fire()
+        HueApi.getBridgeIpAddress({
+            ipAddress in
+            self.ipAddress = ipAddress;
+            self.hueApi = HueApi(ipAddress: ipAddress, username: "newdeveloper")
+            self.hueApi!.getGroups({
+                groupDict in
+                for (id, group) in groupDict {
+                    self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
+                    println(group)
+                }
+            })
+            
+        })
         
     }
     
@@ -110,13 +63,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         switchControl.action = Selector("switchChanged:")
         view.addSubview(switchControl)
         
-        var slider = NSSlider(frame: NSRect(x: 40, y:3, width: 150, height: 20))
-        slider.target = self
+        var slider = HueSlider(frame: NSRect(x: 40, y:3, width: 150, height: 20), callback: {
+            slider in
+            self.hueApi!.setGroupState("\(slider.tag)", on: true, brightness: UInt8(slider.integerValue), transitionTime: 3)
+            switchControl.isOn = on;
+        })
         slider.tag = id.toInt()!
-        slider.action = Selector("onSlide:")
-        slider.maxValue = 255
-        slider.minValue = 0
-        slider.continuous = false
         slider.integerValue = value
         view.addSubview(slider)
         menuItem.view = view
@@ -127,28 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
     
     func switchChanged(sender: SwitchControl) {
         NSLog("Switch: @", sender.isOn)
-        hueApi!.setGroupState("\(sender.tag)", on: sender.isOn, transitionTime: 0)
-    }
-    
-    var ready = true;
-    let seconds = 0.3
-    
-    func onSlide(sender: NSSlider) {
-        if (ready) {
-            ready = false;
-            let delay = seconds * Double(NSEC_PER_SEC)
-            var dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.ready = true;
-            })
-            hueApi!.setGroupState("\(sender.tag)", on: true, brightness: UInt8(sender.integerValue))
-        }
-        NSLog(String(sender.integerValue))
-    }
-    
-    func update() {
-        
+        hueApi!.setGroupState("\(sender.tag)", on: sender.isOn, transitionTime: 10)
     }
     
     @IBAction func lightsOn(sender: NSMenuItem) {

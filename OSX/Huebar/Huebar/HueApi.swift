@@ -73,21 +73,13 @@ public class HueApi {
     let deviceName: String
     let applicationName: String
     
-    var sequenceNumber = 0;
+    static var sequenceNumber = 0;
     
     init(ipAddress: String, username: String, deviceName: String?="OSX", applicationName: String?="HueApi") {
         self.username = username
         self.deviceName = deviceName!
         self.applicationName = applicationName!
         baseUrl = NSURL(string: "http://\(ipAddress)/api/\(username)/")!
-    }
-    
-    func getBridgeIpAddress(success: [[String:String]] -> (), failure: (NSError -> ())?=nil) {
-        get(NSURL(fileURLWithPath: "https://www.meethue.com/api/nupnp")!, success: {
-            (json: JSON) -> Void in
-            NSLog("")
-            success([["id":json[0]["id"].stringValue], ["internalIpAddress":json[0]["interalIpAddress"].stringValue]])
-            }, failure: failure)
     }
     
     func setLightState(lightId: String,
@@ -113,7 +105,7 @@ public class HueApi {
         if let transitionTime = transitionTime { json["transitiontime"].uInt16 = transitionTime }
         if let scene = scene { json["scene"].string = scene }
             
-        put(NSURL(string: "lights/\(lightId)/state", relativeToURL: baseUrl)!, json: json, success: {
+        HueApi.put(NSURL(string: "lights/\(lightId)/state", relativeToURL: baseUrl)!, json: json, success: {
             (json: JSON) -> Void in
             NSLog("")
             success?()
@@ -122,7 +114,7 @@ public class HueApi {
     }
     
     func getLightState(lightId: String, success: Light -> (), failure: (NSError -> ())?=nil) {
-        get(NSURL(string: "lights/\(lightId)", relativeToURL: baseUrl)!, success: {
+        HueApi.get(NSURL(string: "lights/\(lightId)", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             success(Light(id: lightId, name: json["name"].stringValue, on: json["state"]["on"].boolValue, brightness: json["state"]["bri"].intValue))
             }, failure: failure)
@@ -152,7 +144,7 @@ public class HueApi {
         if let transitionTime = transitionTime { json["transitiontime"].uInt16 = transitionTime }
         if let scene = scene { json["scene"].string = scene }
         
-        put(NSURL(string: "groups/\(groupId)/action", relativeToURL: baseUrl)!, json: json, success: {
+        HueApi.put(NSURL(string: "groups/\(groupId)/action", relativeToURL: baseUrl)!, json: json, success: {
             (json: JSON) -> Void in
                 NSLog("")
                 success?()
@@ -160,7 +152,7 @@ public class HueApi {
     }
     
     func getGroupState(groupId: String, success: Group -> (), failure: (NSError -> ())?=nil) {
-        get(NSURL(string: "groups/\(groupId)", relativeToURL: baseUrl)!, success: {
+        HueApi.get(NSURL(string: "groups/\(groupId)", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             success(Group(id: groupId, name: json["name"].stringValue, on: json["action"]["on"].boolValue, brightness: json["action"]["bri"].intValue))
             }, failure: failure)
@@ -168,7 +160,7 @@ public class HueApi {
     }
     
     func getGroups(success: [String:Group] -> (), failure: (NSError -> ())?=nil) {
-        get(NSURL(string: "groups", relativeToURL: baseUrl)!, success: {
+        HueApi.get(NSURL(string: "groups", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             var groupDict: [String:Group] = [:]
             
@@ -183,7 +175,7 @@ public class HueApi {
     }
     
     func getScenes(success: [String:Scene] -> (), failure: (NSError -> ())?=nil)  {
-        get(NSURL(string: "scenes", relativeToURL: baseUrl)!, success: {
+        HueApi.get(NSURL(string: "scenes", relativeToURL: baseUrl)!, success: {
             (json: JSON) -> Void in
             var sceneDict: [String:Scene] = [:]
             
@@ -197,15 +189,33 @@ public class HueApi {
             }, failure: failure)
     }
     
-    func get(url: NSURL, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
+    class func get(url: NSURL, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
         RESTCall("GET", url: url, json: nil, success: success, failure: failure)
     }
     
-    func put(url: NSURL, json: JSON, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
+    class func put(url: NSURL, json: JSON, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
         RESTCall("PUT", url: url, json: json, success: success, failure: failure)
     }
     
-    func RESTCall(httpMethod: String, url: NSURL, json: JSON?, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
+    class func getBridgeIpAddress(success: String -> (), failure: (NSError -> ())?=nil) {
+        get(NSURL(string: "https://www.meethue.com/api/nupnp")!, success: {
+            (json: JSON) -> Void in
+            
+            var ipAddress = json[0]["internalipaddress"].stringValue
+            NSLog("Bridge IP: \(ipAddress)")
+            success(ipAddress)
+            }, failure: failure)
+    }
+    
+    class func getBridges(success: [[String:String]] -> (), failure: (NSError -> ())?=nil) {
+        get(NSURL(string: "https://www.meethue.com/api/nupnp")!, success: {
+            (json: JSON) -> Void in
+            NSLog("")
+            success([["id":json[0]["id"].stringValue], ["internalIpAddress":json[0]["internalipaddress"].stringValue]])
+            }, failure: failure)
+    }
+    
+    class func RESTCall(httpMethod: String, url: NSURL, json: JSON?, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
         sequenceNumber++;
 
         var request = NSMutableURLRequest(URL: url)
@@ -246,11 +256,11 @@ public class HueApi {
         task.resume()
     }
     
-    func jsonToString(json: JSON) -> String {
+    class func jsonToString(json: JSON) -> String {
         return NSString(data: json.rawData()!, encoding: NSUTF8StringEncoding) as! String
     }
     
-    func dataToString(data: NSData) -> NSString {
+    class func dataToString(data: NSData) -> NSString {
         return NSString(data: data, encoding: NSUTF8StringEncoding)!
     }
     
