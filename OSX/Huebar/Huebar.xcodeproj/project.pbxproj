@@ -14,10 +14,6 @@
 		E030D57C1AC61A05004A3BEA /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E030D57A1AC61A05004A3BEA /* MainMenu.xib */; };
 		E030D5881AC61A05004A3BEA /* HueApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E030D5871AC61A05004A3BEA /* HueApiTests.swift */; };
 		E047CDF01BA611810056ACEB /* HueSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047CDEF1BA611810056ACEB /* HueSlider.swift */; };
-		E07B26D31AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */; };
-		E07B26D41AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */; };
-		E07B26D51AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D21AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m */; };
-		E07B26D61AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E07B26D21AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m */; };
 		E0BDFE591ACAAE2C00C77217 /* HueApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BDFE581ACAAE2C00C77217 /* HueApi.swift */; };
 		E0D9E15C1ACACC6F00521E0C /* HueApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BDFE581ACAAE2C00C77217 /* HueApi.swift */; };
 		E0F00EE21AC98A7500ECBD84 /* SwitchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */; };
@@ -44,11 +40,6 @@
 		E030D5861AC61A05004A3BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E030D5871AC61A05004A3BEA /* HueApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueApiTests.swift; sourceTree = "<group>"; };
 		E047CDEF1BA611810056ACEB /* HueSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueSlider.swift; sourceTree = "<group>"; };
-		E07B26CA1AD3F0F300AF36F8 /* Huebar-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Huebar-Bridging-Header.h"; sourceTree = "<group>"; };
-		E07B26CF1AD3F1D800AF36F8 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
-		E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
-		E07B26D11AD3F1D800AF36F8 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
-		E07B26D21AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = ../../../Vendor/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		E0BDFE581ACAAE2C00C77217 /* HueApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueApi.swift; sourceTree = "<group>"; };
 		E0F00EE11AC98A7500ECBD84 /* SwitchControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,11 +89,6 @@
 				E030D5781AC61A05004A3BEA /* Images.xcassets */,
 				E01C3A9B1AC7EE9600AE4371 /* SwiftyJSON.swift */,
 				E030D5741AC61A05004A3BEA /* Supporting Files */,
-				E07B26CA1AD3F0F300AF36F8 /* Huebar-Bridging-Header.h */,
-				E07B26CF1AD3F1D800AF36F8 /* GCDAsyncSocket.h */,
-				E07B26D01AD3F1D800AF36F8 /* GCDAsyncSocket.m */,
-				E07B26D11AD3F1D800AF36F8 /* GCDAsyncUdpSocket.h */,
-				E07B26D21AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m */,
 			);
 			path = Huebar;
 			sourceTree = "<group>";
@@ -186,7 +172,8 @@
 		E030D5691AC61A05004A3BEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Einar Hagen";
 				TargetAttributes = {
 					E030D5701AC61A05004A3BEA = {
@@ -242,11 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0BDFE591ACAAE2C00C77217 /* HueApi.swift in Sources */,
-				E07B26D31AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */,
 				E030D5771AC61A05004A3BEA /* AppDelegate.swift in Sources */,
 				E0F00EE21AC98A7500ECBD84 /* SwitchControl.swift in Sources */,
 				E047CDF01BA611810056ACEB /* HueSlider.swift in Sources */,
-				E07B26D51AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */,
 				E01C3A9C1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,8 +240,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E07B26D41AD3F1D800AF36F8 /* GCDAsyncSocket.m in Sources */,
-				E07B26D61AD3F1D800AF36F8 /* GCDAsyncUdpSocket.m in Sources */,
 				E030D5881AC61A05004A3BEA /* HueApiTests.swift in Sources */,
 				E0D9E15C1ACACC6F00521E0C /* HueApi.swift in Sources */,
 				E01C3A9D1AC7EE9600AE4371 /* SwiftyJSON.swift in Sources */,
@@ -306,6 +289,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -324,6 +308,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -360,6 +345,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 			};
 			name = Release;
 		};
@@ -370,9 +356,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Huebar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.einahage.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Huebar/Huebar-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 			};
 			name = Debug;
 		};
@@ -383,9 +369,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Huebar/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.einahage.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Huebar/Huebar-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
 			};
 			name = Release;
 		};
@@ -404,6 +390,7 @@
 				);
 				INFOPLIST_FILE = HuebarTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.einahage.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Huebar.app/Contents/MacOS/Huebar";
 			};
@@ -420,6 +407,7 @@
 				);
 				INFOPLIST_FILE = HuebarTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.einahage.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Huebar.app/Contents/MacOS/Huebar";
 			};

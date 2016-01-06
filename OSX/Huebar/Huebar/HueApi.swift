@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-public struct Group: Printable {
+public struct Group: CustomStringConvertible {
     let id: String
     let name: String
     let on: Bool
@@ -19,7 +19,7 @@ public struct Group: Printable {
     }
 }
 
-public struct Light: Printable {
+public struct Light: CustomStringConvertible {
     let id: String
     let name: String
     let on: Bool
@@ -29,7 +29,7 @@ public struct Light: Printable {
     }
 }
 
-public struct Scene: Printable {
+public struct Scene: CustomStringConvertible {
     let id: String
     let name: String
     let lights: [String]
@@ -164,7 +164,7 @@ public class HueApi {
             (json: JSON) -> Void in
             var groupDict: [String:Group] = [:]
             
-            for (id: String, groupJson: JSON) in json {
+            for (id, groupJson) in json {
                 groupDict[id] = Group(id: id,
                     name: groupJson["name"].stringValue,
                     on: groupJson["action"]["on"].boolValue,
@@ -179,7 +179,7 @@ public class HueApi {
             (json: JSON) -> Void in
             var sceneDict: [String:Scene] = [:]
             
-            for (id: String, sceneJson: JSON) in json {
+            for (id, sceneJson) in json {
                 sceneDict[id] = Scene(id: id,
                     name: sceneJson["name"].stringValue,
                     lights: sceneJson["lights"].arrayObject as! [String],
@@ -201,7 +201,7 @@ public class HueApi {
         get(NSURL(string: "https://www.meethue.com/api/nupnp")!, success: {
             (json: JSON) -> Void in
             
-            var ipAddress = json[0]["internalipaddress"].stringValue
+            let ipAddress = json[0]["internalipaddress"].stringValue
             NSLog("Bridge IP: \(ipAddress)")
             success(ipAddress)
             }, failure: failure)
@@ -218,31 +218,35 @@ public class HueApi {
     class func RESTCall(httpMethod: String, url: NSURL, json: JSON?, success: (JSON -> ())?=nil, failure: (NSError -> ())?=nil) {
         sequenceNumber++;
 
-        var request = NSMutableURLRequest(URL: url)
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = httpMethod
         request.addValue(String(sequenceNumber), forHTTPHeaderField: "sequenceNumber")
         request.timeoutInterval = 30
         request.HTTPShouldHandleCookies = false
         var body: String = ""
         if json != nil {
-            request.HTTPBody = json!.rawData()!
+            do {
+                request.HTTPBody = try json!.rawData()
+            } catch {
+            
+            }
             body = jsonToString(json!)
         }
-        NSLog("Request (\(sequenceNumber)): \(httpMethod) \(url.absoluteURL!) body:\(body)")
+        NSLog("Request (\(sequenceNumber)): \(httpMethod) \(url.absoluteURL) body:\(body)")
         
-        var task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             (data, response, error) -> Void in
             
             if response != nil {
                 let httpResponse = response as! NSHTTPURLResponse
-                var sequenceNumberStr = request.valueForHTTPHeaderField("sequenceNumber")!
-                NSLog("Response(\(sequenceNumberStr)): statusCode:\(httpResponse.statusCode) body:\(self.dataToString(data))")
+                let sequenceNumberStr = request.valueForHTTPHeaderField("sequenceNumber")!
+                NSLog("Response(\(sequenceNumberStr)): statusCode:\(httpResponse.statusCode) body:\(self.dataToString(data!))")
             }
             
             if error != nil {
-                failure?(error)
+                failure?(error!)
             } else {
-                let json = JSON(data: data)
+                let json = JSON(data: data!)
                 let errorJson = json[0]["error"]
                 if (errorJson != nil) {
                     let errorDescription = errorJson["description"].stringValue
@@ -257,7 +261,12 @@ public class HueApi {
     }
     
     class func jsonToString(json: JSON) -> String {
-        return NSString(data: json.rawData()!, encoding: NSUTF8StringEncoding) as! String
+        do {
+            let jsonString = try json.rawData()
+            return NSString(data: jsonString, encoding: NSUTF8StringEncoding) as! String
+        } catch {
+            return "Cannot decode json!"
+        }
     }
     
     class func dataToString(data: NSData) -> NSString {

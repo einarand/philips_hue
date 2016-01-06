@@ -10,7 +10,7 @@ import Cocoa
 import AppKit
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var lightControlMenu: NSMenu!
     @IBOutlet weak var sliderItem: NSView!
@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         let icon = NSImage(named: "bulbIcon")
-        icon?.setTemplate(true)
+        //'icon?.setTemplate(true)
         statusItem.image = icon
         statusItem.menu = lightControlMenu
         
@@ -32,9 +32,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
             self.hueApi = HueApi(ipAddress: ipAddress, username: "newdeveloper")
             self.hueApi!.getGroups({
                 groupDict in
-                for (id, group) in groupDict {
+                for (_, group) in groupDict {
                     self.addLightGroupItem(group.name, id: group.id, on: group.on, value: group.brightness)
-                    println(group)
+                    print(group)
                 }
             })
             
@@ -43,12 +43,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
     }
     
     func addLightGroupItem(name: String, id: String, on: Bool, value: NSInteger) {
-        var menuItem = NSMenuItem()
+        let menuItem = NSMenuItem()
         menuItem.representedObject = id
         
-        var view = NSView(frame: NSRect(x: 0,y: 0,width: 200,height: 40))
+        let view = NSView(frame: NSRect(x: 0,y: 0,width: 200,height: 40))
         
-        var txt = NSTextField(frame: NSRect(x: 40, y:10, width: 200, height: 30))
+        let txt = NSTextField(frame: NSRect(x: 40, y:10, width: 200, height: 30))
         txt.stringValue = name
         txt.bezeled = false
         txt.drawsBackground = false
@@ -56,19 +56,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         txt.selectable = false
         view.addSubview(txt)
         
-        var switchControl = SwitchControl(frame: NSRect(x: 5, y:5, width: 30, height: 15))
+        let switchControl = SwitchControl(frame: NSRect(x: 5, y:5, width: 30, height: 15))
         switchControl.isOn = on
-        switchControl.tag = id.toInt()!
+        switchControl.tag = Int(id)!
         switchControl.target = self
         switchControl.action = Selector("switchChanged:")
         view.addSubview(switchControl)
         
-        var slider = HueSlider(frame: NSRect(x: 40, y:3, width: 150, height: 20), callback: {
+        let slider = HueSlider(frame: NSRect(x: 40, y:3, width: 150, height: 20), callback: {
             slider in
             self.hueApi!.setGroupState("\(slider.tag)", on: true, brightness: UInt8(slider.integerValue), transitionTime: 3)
             switchControl.isOn = on;
         })
-        slider.tag = id.toInt()!
+        slider.tag = Int(id)!
         slider.integerValue = value
         view.addSubview(slider)
         menuItem.view = view
@@ -86,7 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         NSLog("LightsOn pressed")
         
         let reachableLights : [String] = getReachableLights();
-        for (light: String) in reachableLights {
+        for light: String in reachableLights {
             hueApi!.setLightState(light, on: true)
         }
         
@@ -96,26 +96,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, GCDAsyncUdpSocketDelegate {
         NSLog("LightsOff pressed")
         
         let reachableLights : [String] = getReachableLights();
-        for (light: String) in reachableLights {
+        for light: String in reachableLights {
             hueApi!.setLightState(light, on: false)
         }
     }
     
     func getReachableLights() -> [String] {
         let url: NSURL = NSURL(string: "http://" + ipAddress! + "/api/newdeveloper/lights")!
-        var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "GET"
         var lights = [String]()
         
-        if let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: nil, error: nil) {
+        do {
+            let data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: nil)
             let json = JSON(data: data)
             
-            for (key: String, lightJson: JSON) in json {
+            for (key, lightJson) in json {
                 if (lightJson["state"]["reachable"].boolValue) {
                     lights.append(key)
                 }
             }
-        } else {
+        } catch {
             NSLog("Failed")
         }
         return lights

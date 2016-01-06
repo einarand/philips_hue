@@ -118,10 +118,10 @@ import QuartzCore
         let height = knobHeightForSize(backgroundLayer.bounds.size)
         var width : CGFloat
         if (!self.isActive) {
-            var value = (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kGoldenRatio
+            let value = (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kGoldenRatio
             width = value
         } else {
-            var value = (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kDecreasedGoldenRatio
+            let value = (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kDecreasedGoldenRatio
             width = value
         }
         //let width = (!self.isActive) ? (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kGoldenRatio : (NSWidth(backgroundLayer.bounds) - 2 * kBorderWidth) * 1 / kDecreasedGoldenRatio
@@ -178,9 +178,9 @@ import QuartzCore
     }
     
     // MARK: - NSView
-    override public func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
-        return true
-    }
+    //override public func acceptsFirstMouse(theEvent: NSEvent) -> Bool {
+    //    return true
+    //}
     
     // MARK: - NSResponder
     override public func mouseDown(theEvent: NSEvent) {

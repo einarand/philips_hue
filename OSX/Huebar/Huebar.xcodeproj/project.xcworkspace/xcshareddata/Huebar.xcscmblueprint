@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C96C5280451EB08518FB3853E163B949B8F79702",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C96C5280451EB08518FB3853E163B949B8F79702" : 0,
+    "B515582DBB75994C96F107494A22E751AB76B3FF" : 0,
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : 0,
+    "1C75F1C5CFCB95B3702F6F632FA05ED5244B519E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7F44A0C7-21CC-41A0-A20C-1B98B7759318",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C96C5280451EB08518FB3853E163B949B8F79702" : "philips_hue",
+    "B515582DBB75994C96F107494A22E751AB76B3FF" : "philips_hue\/OSX\/CocoaMondoKit",
+    "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3" : "philips_hue\/SwiftyJSON",
+    "1C75F1C5CFCB95B3702F6F632FA05ED5244B519E" : "philips_hue\/Vendor\/CocoaAsyncSocket"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Huebar",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OSX\/Huebar\/Huebar.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:robbiehanson\/CocoaAsyncSocket.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1C75F1C5CFCB95B3702F6F632FA05ED5244B519E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mcormier\/CocoaMondoKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B515582DBB75994C96F107494A22E751AB76B3FF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:SwiftyJSON\/SwiftyJSON.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C861FC00CEE0F6A6BE81FCFF6785FAA78C58EBB3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:einarand\/philips_hue.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C96C5280451EB08518FB3853E163B949B8F79702"
+    }
+  ]
+}

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Huebar/HueApi.swift"
-            timestampString = "463865757.364253"
+            timestampString = "473813873.484454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "RESTCall(_:url:json:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -431,6 +431,22 @@
             startingLineNumber = "41"
             endingLineNumber = "41"
             landmarkName = "capturer()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Huebar/AppDelegate.swift"
+            timestampString = "469197518.711007"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "addLightGroupItem(_:id:on:value:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
